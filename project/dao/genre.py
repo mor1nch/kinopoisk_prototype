@@ -1,10 +1,7 @@
-from project.dao.base import BaseDAO
 from project.dao.model.genre import Genre
 
 
-class GenresDAO(BaseDAO[Genre]):
-    __model__ = Genre
-
+class GenreDAO:
     def __init__(self, session):
         self.session = session
 
@@ -20,15 +17,15 @@ class GenresDAO(BaseDAO[Genre]):
         self.session.add(new_genre)
         self.session.commit()
 
-    def delete(self, gid: int) -> None:
-        genre = self.get_one(gid)
-
-        self.session.delete(genre)
-        self.session.commit()
-
     def update(self, genre_data: dict) -> None:
         genre = self.get_one(genre_data.get("id"))
         genre.name = genre_data.get("name")
 
         self.session.add(genre)
+        self.session.commit()
+
+    def delete(self, gid: int) -> None:
+        genre = self.get_one(gid)
+
+        self.session.delete(genre)
         self.session.commit()

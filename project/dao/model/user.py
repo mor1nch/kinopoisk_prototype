@@ -1,10 +1,10 @@
 from marshmallow import Schema, fields
 from sqlalchemy import Column, String, Integer
 
-from project.setup.db import models
+from project.setup_db import db
 
 
-class User(models.Base):
+class User(db.session):
     __tablename__ = 'users'
     id = Column(Integer(), primary_key=True)
     email = Column(String(), unique=True, nullable=False)

@@ -1,10 +1,10 @@
 from marshmallow import Schema, fields
 from sqlalchemy import Column, String, Integer
 
-from project.setup.db import models
+from project.setup_db import db
 
 
-class Genre(models.Base):
+class Genre(db.session):
     __tablename__ = 'genres'
     id = Column(Integer(), primary_key=True)
     name = Column(String(100), unique=True, nullable=False)

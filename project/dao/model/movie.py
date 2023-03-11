@@ -4,19 +4,19 @@ from sqlalchemy.orm import relationship
 from project.dao.model.genre import Genre
 from project.dao.model.director import Director
 
-from project.setup.db import models
+from project.setup_db import db
 
 
-class Movie(models.Base):
+class Movie(db.session):
     __tablename__ = 'movies'
     id = Column(Integer(), primary_key=True)
     title = Column(String(), nullable=False)
-    description = Column(String())
-    trailer = Column(String())
-    year = Column(Integer())
-    rating = Column(Float())
-    genre_id = Column(Integer(), ForeignKey(Genre.id))
-    director_id = Column(Integer(), ForeignKey(Director.id))
+    description = Column(String(), nullable=False)
+    trailer = Column(String(), nullable=False)
+    year = Column(Integer(), nullable=False)
+    rating = Column(Float(), nullable=False)
+    genre_id = Column(Integer(), ForeignKey(Genre.id), nullable=False)
+    director_id = Column(Integer(), ForeignKey(Director.id), nullable=False)
     genre = relationship("Genre")
     director = relationship("Director")
 

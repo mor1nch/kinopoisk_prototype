@@ -1,10 +1,9 @@
-from project.dao.base import BaseDAO
+from sqlalchemy import desc
+
 from project.dao.model.movie import Movie
 
 
-class MoviesDAO(BaseDAO[Movie]):
-    __model__ = Movie
-
+class MovieDAO:
     def __init__(self, session):
         self.session = session
 
@@ -23,16 +22,13 @@ class MoviesDAO(BaseDAO[Movie]):
     def get_by_year(self, year: int) -> list[Movie]:
         return self.session.query(Movie).filter(Movie.year == year).all()
 
+    def get_by_status(self):
+        return self.session.query(Movie).order_by(desc(Movie.year))
+
     def create(self, movie_data: dict) -> None:
         new_movie = Movie(**movie_data)
 
         self.session.add(new_movie)
-        self.session.commit()
-
-    def delete(self, mid: int) -> None:
-        movie = self.get_one(mid)
-
-        self.session.delete(movie)
         self.session.commit()
 
     def update(self, movie_data: dict) -> None:
@@ -47,4 +43,10 @@ class MoviesDAO(BaseDAO[Movie]):
         movie.director_id = movie_data.get("director_id")
 
         self.session.add(movie)
+        self.session.commit()
+
+    def delete(self, mid: int) -> None:
+        movie = self.get_one(mid)
+
+        self.session.delete(movie)
         self.session.commit()

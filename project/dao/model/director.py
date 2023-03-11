@@ -1,10 +1,10 @@
 from marshmallow import Schema, fields
 from sqlalchemy import Column, String, Integer
 
-from project.setup.db import models
+from project.setup_db import db
 
 
-class Director(models.Base):
+class Director(db.session):
     __tablename__ = 'directors'
     id = Column(Integer(), primary_key=True)
     name = Column(String(255), unique=True, nullable=False)
