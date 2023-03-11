@@ -9,8 +9,6 @@ from project.views.movies import movie_ns
 from project.views.users import user_ns
 from project.views.auth import auth_ns
 
-api = Api(doc='/docs')
-
 
 def create_app(config_object):
     app = Flask(__name__)
@@ -21,7 +19,7 @@ def create_app(config_object):
 
 def register_extensions(app):
     db.init_app(app)
-    api.init_app(app)
+    api = Api(app)
     api.add_namespace(director_ns)
     api.add_namespace(genre_ns)
     api.add_namespace(movie_ns)
@@ -33,4 +31,4 @@ app = create_app(Config())
 app.debug = True
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    app.run(host="localhost", port=10001, debug=True)
