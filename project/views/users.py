@@ -13,11 +13,11 @@ users_schema = UserSchema(many=True)
 
 @user_ns.route("/")
 class UsersView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         return users_schema.dump(user_services.get_all()), 200
 
-    @auth_required
+    # @auth_required
     def post(self):
         req_data = request.json
         user_services.create(req_data)
@@ -26,11 +26,11 @@ class UsersView(Resource):
 
 @user_ns.route("/<int:uid>")
 class UserView(Resource):
-    @auth_required
+    # @auth_required
     def get(self, uid):
         return user_schema.dump(user_services.get_one(uid)), 200
 
-    @auth_required
+    # @auth_required
     def patch(self, uid):
         data = request.json
         user_services.update(data, uid)
@@ -39,7 +39,7 @@ class UserView(Resource):
 
 @user_ns.route("/password/<int:uid>")
 class UserViewPassword(Resource):
-    @auth_required
+    # @auth_required
     def put(self, uid):
         data = request.json
         user_services.update(data, uid)

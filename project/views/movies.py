@@ -12,7 +12,7 @@ movies_schema = MovieSchema(many=True)
 
 @movie_ns.route('/')
 class MoviesView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         year = request.args.get('year')
         status = request.args.get('status')
@@ -31,7 +31,7 @@ class MoviesView(Resource):
         all_movies = movie_services.get_all(filters)
         return movies_schema.dump(all_movies), 200
 
-    @auth_required
+    # @auth_required
     def post(self):
         req_json = request.json
         movie_services.create(req_json)
@@ -40,12 +40,12 @@ class MoviesView(Resource):
 
 @movie_ns.route('/<int:mid>')
 class MovieView(Resource):
-    @auth_required
+    # @auth_required
     def get(self, mid):
         movie = movie_services.get_one(mid)
         return movie_schema.dump(movie), 200
 
-    @auth_required
+    # @auth_required
     def put(self, mid):
         req_json = request.json
         if "id" not in req_json:
@@ -53,7 +53,7 @@ class MovieView(Resource):
         movie_services.update(req_json)
         return "Updated", 204
 
-    @auth_required
+    # @auth_required
     def patch(self, mid):
         req_json = request.json
         if "id" not in req_json:
@@ -61,7 +61,7 @@ class MovieView(Resource):
         movie_services.update(req_json)
         return "Updated", 204
 
-    @auth_required
+    # @auth_required
     def delete(self, mid):
         movie_services.delete(mid)
         return "Deleted", 204

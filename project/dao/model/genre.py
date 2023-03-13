@@ -4,8 +4,8 @@ from sqlalchemy import Column, String, Integer
 from project.setup_db import db
 
 
-class Genre(db.session):
-    __tablename__ = 'genres'
+class Genre(db.Model):
+    __tablename__ = 'genre'
     id = Column(Integer(), primary_key=True)
     name = Column(String(100), unique=True, nullable=False)
 

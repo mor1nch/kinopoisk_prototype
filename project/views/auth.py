@@ -7,18 +7,18 @@ from project.helpers.decorators import auth_required
 auth_ns = Namespace("auth")
 
 
-@auth_ns.route('/register')
+@auth_ns.route('/register/')
 class AuthViewRegister(Resource):
-    @auth_required
+    # @auth_required
     def post(self):
         req_json = request.json
         user_services.create(req_json)
         return 'Created', 201
 
 
-@auth_ns.route('/login')
+@auth_ns.route('/login/')
 class AuthView(Resource):
-    @auth_required
+    # @auth_required
     def post(self):
         req_json = request.json
         email = req_json.get('email', None)
@@ -29,7 +29,7 @@ class AuthView(Resource):
         tokens = auth_services.generate_token(email, password)
         return tokens, 201
 
-    @auth_required
+    # @auth_required
     def put(self):
         req_json = request.json
         refresh_token = req_json.get('refresh_token', None)

@@ -7,8 +7,8 @@ from project.dao.model.director import Director
 from project.setup_db import db
 
 
-class Movie(db.session):
-    __tablename__ = 'movies'
+class Movie(db.Model):
+    __tablename__ = 'movie'
     id = Column(Integer(), primary_key=True)
     title = Column(String(), nullable=False)
     description = Column(String(), nullable=False)

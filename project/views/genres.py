@@ -12,12 +12,12 @@ genres_schema = GenreSchema(many=True)
 
 @genre_ns.route('/')
 class GenresView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         all_genres = genre_services.get_all()
         return genres_schema.dump(all_genres), 200
 
-    @auth_required
+    # @auth_required
     def post(self):
         req_json = request.json
         genre = genre_services.create(req_json)
@@ -26,12 +26,12 @@ class GenresView(Resource):
 
 @genre_ns.route('/<int:gid>')
 class GenreView(Resource):
-    @auth_required
+    # @auth_required
     def get(self, gid):
         genre = genre_services.get_one(gid)
         return genre_schema.dump(genre), 200
 
-    @auth_required
+    # @auth_required
     def put(self, gid):
         req_json = request.json
         if "id" not in req_json:
@@ -39,7 +39,7 @@ class GenreView(Resource):
         genre_services.update(req_json)
         return "Updated", 204
 
-    @auth_required
+    # @auth_required
     def delete(self, gid):
         genre_services.delete(gid)
         return "Deleted", 204

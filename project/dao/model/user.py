@@ -4,8 +4,8 @@ from sqlalchemy import Column, String, Integer
 from project.setup_db import db
 
 
-class User(db.session):
-    __tablename__ = 'users'
+class User(db.Model):
+    __tablename__ = 'user'
     id = Column(Integer(), primary_key=True)
     email = Column(String(), unique=True, nullable=False)
     password = Column(String(), nullable=False)

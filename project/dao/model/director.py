@@ -4,8 +4,8 @@ from sqlalchemy import Column, String, Integer
 from project.setup_db import db
 
 
-class Director(db.session):
-    __tablename__ = 'directors'
+class Director(db.Model):
+    __tablename__ = 'director'
     id = Column(Integer(), primary_key=True)
     name = Column(String(255), unique=True, nullable=False)
 
