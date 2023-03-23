@@ -20,6 +20,7 @@ class UsersView(Resource):
     # @auth_required
     def post(self):
         req_data = request.json
+        print(1)
         user_services.create(req_data)
         return "", 201
 
